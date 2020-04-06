@@ -1,0 +1,34 @@
+//The rate at which acceleration can change.  1 is actually a somewhat large value.
+//This value determines responsiveness of acceleration- set equal to MaxAcceleration for the maximum responsiveness.
+//I just don't like playing that way because it's so jerky.
+Setting,ForwardJerk,1
+//The rate at which braking can change.  Basically the same as ForwardJerk.
+Setting,BreakingJerk,1
+//The maximum acceleration with no improvement from ramjet effect.  100 is a very large value.
+Setting,MaxAcceleration,100
+//Maximal breaking magnitude.  Speed can be reduced more quickly due to breaking working with drag and gravity while climbing, not against it.
+Setting,MaxBreaking,15
+//Not yet implemented- intended to smoothen controls at higher speeds.
+Setting,Vectoring,5
+//The "normal top speed" of the game.  When set to 1250 and the player doesn't thrust or break, the game plays just like normal.
+Setting,RegularTopSpeed,1250
+//Ramjet effect:  As speed increases, so does thrust.
+//A constant governing how much ramjet effect there is.  When set to 0 there is no ramjet effect.
+Setting,RamJetConstant,0
+//A constant that determines how quickly thrust grows with respect to speed.  
+//If the Ramjet growth power is greater than the Drag growth power, there is no limit to top speed, which isn't a good thing.
+//This is an exponent value, by the way.  Thrust grows proportionally to currentSpeed ^ RamJetGrowthPower.
+Setting,RamJetGrowthPower,1
+//A constant governing how much drag there is when speed is in excess- that is, currentSpeed - RegularTopSpeed > 0.
+Setting,ExcessiveSpeedDragConstant,25
+//A constant that determines how quickly drag grows with respect to excess speed-
+//drag grows proportionally to (currentSpeed - RegularTopSpeed) ^ DragGrowthPower.
+Setting,DragGrowthPower,2
+//A modifier meant to prevent explosions in acceleration between frames as a result of exponential growth in drag.
+//Probably best not to touch this.
+Setting,SmoothnessConstant,.001
+KeyboardKey,BoostKey,LeftControl
+KeyboardKey,BreakKey,LeftShift
+//Actual top speed is a complicated function of MaxAcceleration, RegularTopSpeed, RamJetConstant,
+//RamJetGrowthPower, ExcessiveSpeedDragConstant, DragGrowthPower, and SmoothnessConstant.
+//And also probably some variables hardcoded into the vanilla game that I don't have access to.
